@@ -17,42 +17,21 @@ namespace Descobrindo_o_mundo_API.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        // POST api/<UsuarioController>
+        //api/[controller]
         [HttpPost]
-        public void Post([FromBody] Usuario usuario)
+        public TblUsuario Post([FromBody] Usuario usuario)
         {
             usuario.Cadastrar(usuario);
-            if(usuario.Tipo == 1)
-            {
-                Paciente _paciente = new Paciente();
-                int id = TrazIdUsuario(usuario.Email);
-                _paciente.Cadastrar((Paciente)usuario,id);
-            }
+            descobrindo_mundoContext _db = new descobrindo_mundoContext();
+
+            return _db.TblUsuario.Single(x => x.EmailUsuario == usuario.Email);
         }
 
         //api/[controller]/Login
         [HttpGet("Login")]
         public Usuario Login([FromBody] Usuario usuario)
         {
-            Usuario _usuario = new Usuario();
-            Usuario UsuarioRetorno = _usuario.Login(usuario.Email, usuario.Senha);
-            return UsuarioRetorno;
+            return usuario.Login(usuario.Email,usuario.Senha);
         }
-
-        public static int TrazIdUsuario(string p)
-        {
-            descobrindo_mundoContext db = new descobrindo_mundoContext();
-            TblUsuario _usuario = db.TblUsuario.Single(x => x.EmailUsuario == p);
-            return _usuario.IdUsuario;
-        }
-
-        /*public class Teste
-        {
-            private DateTime _data;
-            public string data {
-                get => _data.ToString();
-                set => _data = DateTime.Parse(value);
-            }
-        }*/
     }
 }

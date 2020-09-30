@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Descobrindo_o_mundo_API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,10 @@ namespace Descobrindo_o_mundo_API
         #endregion
 
         #region Construtores
+        public TblUsuario()
+        {
+
+        }
         public TblUsuario(string nome,string sbNome,DateTime dtNascimento,string email,string senha,int tipo)
         {
             this.NmUsuario = nome;
@@ -30,8 +35,31 @@ namespace Descobrindo_o_mundo_API
             this.SenhaUsuario = senha;
             this.IdTipoUsuario = tipo;
         }
+
+        public TblUsuario(string nome, string sbNome, DateTime dtNascimento, string email, string senha, int tipo, TblPaciente paciente)
+        {
+            this.NmUsuario = nome;
+            this.SbrnmUsuario = sbNome;
+            this.DtNascUsuario = dtNascimento;
+            this.EmailUsuario = email;
+            this.SenhaUsuario = senha;
+            this.IdTipoUsuario = tipo;
+            this.TblPaciente = paciente;
+        }
+        /*public TblUsuario(TblUsuario tblUsuario)
+        {
+            this.IdUsuario = tblUsuario.IdUsuario;
+            this.NmUsuario = tblUsuario.NmUsuario;
+            this.SbrnmUsuario = tblUsuario.SbrnmUsuario;
+            this.EmailUsuario = tblUsuario.EmailUsuario;
+            this.SenhaUsuario = tblUsuario.SenhaUsuario;
+            this.IdTipoUsuario = tblUsuario.IdTipoUsuario;
+            this.IdTipoUsuarioNavigation = tblUsuario.IdTipoUsuarioNavigation;
+            this.TblPaciente = tblUsuario.TblPaciente;
+            this.TblProfissional = tblUsuario.TblProfissional;
+        }*/
         #endregion
 
-        
+
     }
 }

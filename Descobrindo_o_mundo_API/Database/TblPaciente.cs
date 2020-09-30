@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Descobrindo_o_mundo_API.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Descobrindo_o_mundo_API
@@ -27,6 +28,11 @@ namespace Descobrindo_o_mundo_API
         {
             this.DscNicknamePaciente = nick;
             this.IdUsuarioPaciente = idUsuarioPaciente;
+        }
+
+        public TblPaciente(string nick)
+        {
+            this.DscNicknamePaciente = nick;
         }
         #endregion
     }
