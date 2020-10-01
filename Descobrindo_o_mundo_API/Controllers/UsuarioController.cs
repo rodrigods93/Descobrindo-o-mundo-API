@@ -29,9 +29,26 @@ namespace Descobrindo_o_mundo_API.Controllers
 
         //api/[controller]/Login
         [HttpGet("Login")]
-        public Usuario Login([FromBody] Usuario usuario)
+        public ActionResult<Usuario> Login([FromBody] Usuario usuario)
         {
-            return usuario.Login(usuario.Email,usuario.Senha);
+            try
+            {
+                return Ok(usuario.Login(usuario.Email, usuario.Senha));
+                    //;
+            }
+            catch (System.InvalidOperationException e)
+            {
+                return Unauthorized(
+                        new ErrorResponse("Login ou senha inválidos")
+                    );
+            }
+            catch (Exception e)
+            {
+                
+                return StatusCode(
+                        500,new ErrorResponse("Não foi possível responder a requisição")
+                    );
+            }
         }
     }
 }
