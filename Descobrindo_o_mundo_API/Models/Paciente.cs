@@ -39,15 +39,5 @@ namespace Descobrindo_o_mundo_API.Models
             this.IdUsuario = idUsuario;
         }
         #endregion
-
-        /*
-         * TODO
-         * Método para cadastrar usuário dentro do BD.*/
-        /*public void Cadastrar(Paciente paciente,int idUsuario)
-        {
-            descobrindo_mundoContext _db = new descobrindo_mundoContext();
-            TblPaciente tblPaciente = new TblPaciente(paciente.Nickname,idUsuario);
-            _db.TblPaciente.Add(tblPaciente);
-        }*/
     }
 }

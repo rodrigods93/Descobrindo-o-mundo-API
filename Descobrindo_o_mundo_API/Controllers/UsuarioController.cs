@@ -6,6 +6,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Descobrindo_o_mundo_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 
@@ -19,12 +21,27 @@ namespace Descobrindo_o_mundo_API.Controllers
     {
         //api/[controller]
         [HttpPost]
-        public TblUsuario Post([FromBody] Usuario usuario)
+        public ActionResult<TblUsuario> Post([FromBody] Usuario usuario)
         {
-            usuario.Cadastrar(usuario);
-            descobrindo_mundoContext _db = new descobrindo_mundoContext();
-
-            return _db.TblUsuario.Single(x => x.EmailUsuario == usuario.Email);
+            try
+            {
+                usuario.Cadastrar(usuario);
+                descobrindo_mundoContext _db = new descobrindo_mundoContext();
+                var user = _db.TblUsuario.Single(x => x.EmailUsuario == usuario.Email);
+                return Created("api/Usuario", user);
+            }
+            catch (DbUpdateException e)
+            {
+                return StatusCode(
+                        500, new ErrorResponse("Não foi possível cadastrar o usuário.")
+                    );
+            }
+            catch (Exception e)
+            {
+                return StatusCode(
+                        500,new ErrorResponse("Não foi possível responder a requisição.")
+                    );
+            }
         }
 
         //api/[controller]/Login

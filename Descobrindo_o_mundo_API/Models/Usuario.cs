@@ -17,6 +17,7 @@ namespace Descobrindo_o_mundo_API
         private string _senha;
         private int _tipo;
         private Paciente _paciente;
+        private Profissional _profissional;
         #endregion
 
         #region Properties
@@ -28,6 +29,7 @@ namespace Descobrindo_o_mundo_API
         public string Senha { get => _senha; set => _senha = value; }
         public int Tipo { get => _tipo; set => _tipo = value; }
         public Paciente Paciente { get => _paciente; set => _paciente = value; }
+        public Profissional Profissional { get => _profissional; set => _profissional = value; }
         #endregion
 
         #region Construtores
@@ -70,17 +72,23 @@ namespace Descobrindo_o_mundo_API
 
         public void Cadastrar(Usuario usuario)
         {
-            TblPaciente tblPaciente = new TblPaciente(usuario.Paciente.Nickname);
-            TblUsuario _usuarioCadastro = new TblUsuario(usuario.Nome, usuario.Sobrenome, usuario._dtNascimento, usuario.Email, usuario.Senha, usuario.Tipo,tblPaciente);
             descobrindo_mundoContext _db = new descobrindo_mundoContext();
-            _db.TblUsuario.Add(_usuarioCadastro);
-            _db.SaveChanges();
+            switch (usuario.Tipo)
+            {
+                case 1:
+                    TblPaciente tblPaciente = new TblPaciente(usuario.Paciente.Nickname);
+                    TblUsuario _usuarioCadastroPaciente = new TblUsuario(usuario.Nome, usuario.Sobrenome, usuario._dtNascimento, usuario.Email, usuario.Senha, usuario.Tipo, tblPaciente);
+                    _db.TblUsuario.Add(_usuarioCadastroPaciente);
+                    _db.SaveChanges();
+                    break;
+                case 2:
+                    TblProfissional tblProfissional = new TblProfissional(usuario._profissional.Crm);
+                    TblUsuario _usuarioCadastroProfissional = new TblUsuario(usuario.Nome, usuario.Sobrenome, usuario._dtNascimento, usuario.Email, usuario.Senha, usuario.Tipo, tblProfissional);
+                    _db.TblUsuario.Add(_usuarioCadastroProfissional);
+                    _db.SaveChanges();
+                    break;
+            } 
         }
-
-        #endregion
-
-        #region Métodos auxiliares
-
         #endregion
     }
 }
