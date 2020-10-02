@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Descobrindo_o_mundo_API.Models;
+using Descobrindo_o_mundo_API.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace Descobrindo_o_mundo_API.Controllers
     {
         //api/[controller]
         [HttpPost]
-        public ActionResult<TblUsuario> Post([FromBody] Usuario usuario)
+        public ActionResult<TblUsuario> Cadastrar([FromBody] Usuario usuario)
         {
             try
             {
@@ -39,7 +40,7 @@ namespace Descobrindo_o_mundo_API.Controllers
             catch (Exception e)
             {
                 return StatusCode(
-                        500,new ErrorResponse("Não foi possível responder a requisição.")
+                        500, new ErrorResponse("Não foi possível responder a requisição.")
                     );
             }
         }
@@ -51,7 +52,7 @@ namespace Descobrindo_o_mundo_API.Controllers
             try
             {
                 return Ok(usuario.Login(usuario.Email, usuario.Senha));
-                    //;
+                //;
             }
             catch (System.InvalidOperationException e)
             {
@@ -61,11 +62,19 @@ namespace Descobrindo_o_mundo_API.Controllers
             }
             catch (Exception e)
             {
-                
+
                 return StatusCode(
-                        500,new ErrorResponse("Não foi possível responder a requisição")
+                        500, new ErrorResponse("Não foi possível responder a requisição")
                     );
             }
+        }
+
+        //api/[controller]/RecuperarSenha
+        [HttpPost("RecuperarSenha")]
+        public ActionResult RecuperarSenha([FromBody] Usuario usuario)
+        {
+            usuario.RecuperarSenha(usuario.Email);
+            return Ok();
         }
     }
 }

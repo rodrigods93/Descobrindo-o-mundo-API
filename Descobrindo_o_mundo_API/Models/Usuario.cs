@@ -1,4 +1,5 @@
 ﻿using Descobrindo_o_mundo_API.Models;
+using Descobrindo_o_mundo_API.Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,9 @@ namespace Descobrindo_o_mundo_API
         #endregion
 
         #region Construtores
+        public Usuario()
+        {
+        }
         public Usuario(int id, string nome, string sobrenome, string dtNascimento, string email, string senha, int tipo)
         {
             this.Id = id;
@@ -54,10 +58,6 @@ namespace Descobrindo_o_mundo_API
             this.Senha = senha;
             this.Tipo = tipo;
             this.Paciente = paciente;
-        }
-
-        public Usuario()
-        {
         }
         #endregion
 
@@ -88,6 +88,28 @@ namespace Descobrindo_o_mundo_API
                     _db.SaveChanges();
                     break;
             } 
+        }
+
+        public void RecuperarSenha(string email)
+        {
+            descobrindo_mundoContext _db = new descobrindo_mundoContext();
+            TblUsuario _usuario = _db.TblUsuario.Single(x => x.EmailUsuario == email);
+            _usuario.SenhaUsuario = alfanumericoAleatorio(10);
+            _db.SaveChanges();
+            MailService.Send(new Usuario(_usuario.IdUsuario,_usuario.NmUsuario,_usuario.SbrnmUsuario,_usuario.DtNascUsuario.ToString(),_usuario.EmailUsuario,_usuario.SenhaUsuario,_usuario.IdTipoUsuario));
+        }
+        #endregion
+
+        #region Métodos auxiliares
+        public static string alfanumericoAleatorio(int tamanho)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%/&*()_-=+?{}[]";
+            var random = new Random();
+            var result = new string(
+                Enumerable.Repeat(chars, tamanho)
+                          .Select(s => s[random.Next(s.Length)])
+                          .ToArray());
+            return result;
         }
         #endregion
     }
