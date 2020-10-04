@@ -1,5 +1,7 @@
 ﻿using Descobrindo_o_mundo_API.Models;
 using Descobrindo_o_mundo_API.Models.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +49,6 @@ namespace Descobrindo_o_mundo_API
             this.Senha = senha;
             this.Tipo = tipo;
         }
-
         public Usuario(int id, string nome, string sobrenome, string dtNascimento, string email, string senha, int tipo, Paciente paciente)
         {
             this.Id = id;
@@ -58,6 +59,17 @@ namespace Descobrindo_o_mundo_API
             this.Senha = senha;
             this.Tipo = tipo;
             this.Paciente = paciente;
+        }
+        public Usuario(int id, string nome, string sobrenome, string dtNascimento, string email, string senha, int tipo, Profissional profissional)
+        {
+            this.Id = id;
+            this.Nome = nome;
+            this.Sobrenome = sobrenome;
+            this.DtNascimento = dtNascimento;
+            this.Email = email;
+            this.Senha = senha;
+            this.Tipo = tipo;
+            this.Profissional = profissional;
         }
         #endregion
 
@@ -90,26 +102,90 @@ namespace Descobrindo_o_mundo_API
             } 
         }
 
+        public void Atualizar(Usuario usuario)
+        {
+            descobrindo_mundoContext _db = new descobrindo_mundoContext();
+            switch (usuario.Tipo)
+            {
+                case 1:
+                    TblUsuario tblUsuarioPaciente = _db.TblUsuario.Include(x => x.TblPaciente).First(x => x.IdUsuario == usuario.Id);
+                    if (tblUsuarioPaciente.NmUsuario != usuario.Nome)
+                    {
+                        tblUsuarioPaciente.NmUsuario = usuario.Nome;
+                    }
+                    else if(tblUsuarioPaciente.SbrnmUsuario != usuario.Sobrenome)
+                    {
+                        tblUsuarioPaciente.SbrnmUsuario = usuario.Sobrenome;
+                    }
+                    else if (tblUsuarioPaciente.DtNascUsuario != DateTime.Parse(usuario.DtNascimento))
+                    {
+                        tblUsuarioPaciente.DtNascUsuario = DateTime.Parse(usuario.Sobrenome);
+                    }
+                    else if (tblUsuarioPaciente.EmailUsuario != usuario.Email)
+                    {
+                        tblUsuarioPaciente.EmailUsuario = usuario.Email;
+                    }
+                    else if (tblUsuarioPaciente.SenhaUsuario != usuario.Senha)
+                    {
+                        tblUsuarioPaciente.SenhaUsuario = usuario.Senha;
+                    }
+                    else if (tblUsuarioPaciente.TblPaciente.DscNicknamePaciente != usuario.Paciente.Nickname)
+                    {
+                        tblUsuarioPaciente.TblPaciente.DscNicknamePaciente = usuario.Paciente.Nickname;
+                    }
+                    _db.SaveChanges();
+                    break;
+                case 2:
+                    TblUsuario tblUsuarioProfissional = _db.TblUsuario.Include(x => x.TblProfissional).First(x => x.IdUsuario == usuario.Id);
+                    if (tblUsuarioProfissional.NmUsuario != usuario.Nome)
+                    {
+                        tblUsuarioProfissional.NmUsuario = usuario.Nome;
+                    }
+                    else if (tblUsuarioProfissional.SbrnmUsuario != usuario.Sobrenome)
+                    {
+                        tblUsuarioProfissional.SbrnmUsuario = usuario.Sobrenome;
+                    }
+                    else if (tblUsuarioProfissional.DtNascUsuario != DateTime.Parse(usuario.DtNascimento))
+                    {
+                        tblUsuarioProfissional.DtNascUsuario = DateTime.Parse(usuario.Sobrenome);
+                    }
+                    else if (tblUsuarioProfissional.EmailUsuario != usuario.Email)
+                    {
+                        tblUsuarioProfissional.EmailUsuario = usuario.Email;
+                    }
+                    else if (tblUsuarioProfissional.SenhaUsuario != usuario.Senha)
+                    {
+                        tblUsuarioProfissional.SenhaUsuario = usuario.Senha;
+                    }
+                    else if (tblUsuarioProfissional.TblProfissional.CrmProfissional != usuario.Profissional.Crm)
+                    {
+                        tblUsuarioProfissional.TblProfissional.CrmProfissional = usuario.Profissional.Crm;
+                    }
+                    _db.SaveChanges();
+                    break;
+            }
+        }
+
         public void RecuperarSenha(string email)
         {
             descobrindo_mundoContext _db = new descobrindo_mundoContext();
             TblUsuario _usuario = _db.TblUsuario.Single(x => x.EmailUsuario == email);
-            _usuario.SenhaUsuario = alfanumericoAleatorio(10);
+            _usuario.SenhaUsuario = NovaSenha(10);
             _db.SaveChanges();
-            MailService.Send(new Usuario(_usuario.IdUsuario,_usuario.NmUsuario,_usuario.SbrnmUsuario,_usuario.DtNascUsuario.ToString(),_usuario.EmailUsuario,_usuario.SenhaUsuario,_usuario.IdTipoUsuario));
+            MailService.Send(new Usuario(_usuario.IdUsuario, _usuario.NmUsuario, _usuario.SbrnmUsuario, _usuario.DtNascUsuario.ToString(), _usuario.EmailUsuario, _usuario.SenhaUsuario, _usuario.IdTipoUsuario));
         }
         #endregion
 
         #region Métodos auxiliares
-        public static string alfanumericoAleatorio(int tamanho)
+        public static string NovaSenha(int tamanho)
         {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%/&*()_-=+?{}[]";
+            var caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%/&*()_-=+?{}[]";
             var random = new Random();
-            var result = new string(
-                Enumerable.Repeat(chars, tamanho)
-                          .Select(s => s[random.Next(s.Length)])
+            var resultado = new string(
+                Enumerable.Repeat(caracteres, tamanho)
+                          .Select(x => x[random.Next(x.Length)])
                           .ToArray());
-            return result;
+            return resultado;
         }
         #endregion
     }

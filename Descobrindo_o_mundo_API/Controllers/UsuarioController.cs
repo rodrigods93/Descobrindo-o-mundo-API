@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Descobrindo_o_mundo_API.Models;
 using Descobrindo_o_mundo_API.Models.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
@@ -20,6 +21,29 @@ namespace Descobrindo_o_mundo_API.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
+        //api/[controller]/Login
+        [HttpGet("Login")]
+        public ActionResult<Usuario> Login([FromBody] Usuario usuario)
+        {
+            try
+            {
+                return Ok(usuario.Login(usuario.Email, usuario.Senha));
+            }
+            catch (InvalidOperationException)
+            {
+                return Unauthorized(
+                        new ErrorResponse("Login ou senha inválidos.")
+                    );
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(
+                        500, new ErrorResponse("Não foi possível responder a requisição.")
+                    );
+            }
+        }
+
         //api/[controller]
         [HttpPost]
         public ActionResult<TblUsuario> Cadastrar([FromBody] Usuario usuario)
@@ -31,7 +55,7 @@ namespace Descobrindo_o_mundo_API.Controllers
                 var user = _db.TblUsuario.Single(x => x.EmailUsuario == usuario.Email);
                 return Created("api/Usuario", user);
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateException)
             {
                 return StatusCode(
                         500, new ErrorResponse("Não foi possível cadastrar o usuário.")
@@ -45,36 +69,44 @@ namespace Descobrindo_o_mundo_API.Controllers
             }
         }
 
-        //api/[controller]/Login
-        [HttpGet("Login")]
-        public ActionResult<Usuario> Login([FromBody] Usuario usuario)
-        {
-            try
-            {
-                return Ok(usuario.Login(usuario.Email, usuario.Senha));
-                //;
-            }
-            catch (System.InvalidOperationException e)
-            {
-                return Unauthorized(
-                        new ErrorResponse("Login ou senha inválidos")
-                    );
-            }
-            catch (Exception e)
-            {
-
-                return StatusCode(
-                        500, new ErrorResponse("Não foi possível responder a requisição")
-                    );
-            }
-        }
-
         //api/[controller]/RecuperarSenha
         [HttpPost("RecuperarSenha")]
         public ActionResult RecuperarSenha([FromBody] Usuario usuario)
         {
-            usuario.RecuperarSenha(usuario.Email);
-            return Ok();
+            try
+            {
+                usuario.RecuperarSenha(usuario.Email);
+                return Ok();
+            }
+            catch (InvalidOperationException)
+            {
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(
+                        500, new ErrorResponse("Não foi possível responder a requisição.")
+                    );
+            }
+        }
+
+        //api/[controller]
+        [HttpPut]
+        public ActionResult<Usuario> Atualizar([FromBody] Usuario usuario)
+        {
+            try
+            {
+                usuario.Atualizar(usuario);
+                return Ok(usuario);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(
+                        500,
+                        new ErrorResponse("Não foi possível responder a requisição.")
+                    );
+            }
         }
     }
 }
