@@ -151,4 +151,3 @@ E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreap
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.dll
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.pdb
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.genruntimeconfig.cache
-E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.csprojAssemblyReference.cache
