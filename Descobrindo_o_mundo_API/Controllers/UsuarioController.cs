@@ -23,11 +23,12 @@ namespace Descobrindo_o_mundo_API.Controllers
     {
         //api/[controller]/Login
         [HttpGet("Login")]
-        public ActionResult<Usuario> Login([FromBody] Usuario usuario)
+        public ActionResult<Usuario> Login(string email, string senha)
         {
             try
             {
-                return Ok(usuario.Login(usuario.Email, usuario.Senha));
+                Usuario usuario = new Usuario();
+                return Ok(usuario.Login(email,senha));
             }
             catch (InvalidOperationException)
             {
@@ -61,7 +62,7 @@ namespace Descobrindo_o_mundo_API.Controllers
                         500, new ErrorResponse("Não foi possível cadastrar o usuário.")
                     );
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(
                         500, new ErrorResponse("Não foi possível responder a requisição.")

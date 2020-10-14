@@ -13,7 +13,6 @@ namespace Descobrindo_o_mundo_API.Models.Services
         #region Propriedades
         private static string _emailOrigem = "suporte.descobrindo.o.mundo@gmail.com";
         private static string _tituloEmail = "Recuperação de senha - Descobrindo o mundo";
-        private static string _corpoEmail = "<h1>Pedido de redefinição de senha</h1> <p>Olá fulano, segue as informações para recuperar seu acesso ao aplicativo.</p> <p>Senha: senha1234</p>";
         private static string _servidorProvedorEmail = "smtp.gmail.com";
         private static int _portaServidorProvedorEmail = 587;
         private static string _credenciaisEmail = "LightTech@1234";

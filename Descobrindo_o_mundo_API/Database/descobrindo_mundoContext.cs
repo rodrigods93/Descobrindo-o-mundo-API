@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols;
 
 namespace Descobrindo_o_mundo_API
@@ -31,7 +32,7 @@ namespace Descobrindo_o_mundo_API
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=descobrindo_mundo;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=192.168.0.73\\SQLEXPRESS;Initial Catalog=descobrindo_mundo;Persist Security Info=True;User ID=lucas; Password=Lucas@1234");
             }
         }
 

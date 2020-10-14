@@ -25,7 +25,6 @@ namespace Descobrindo_o_mundo_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<descobrindo_mundoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Data Source=localhost\\SQLEXPRESS;Initial Catalog=descobrindo_mundo;Integrated Security=True")));
             services.AddDbContext<descobrindo_mundoContext>();
             services.AddControllers();
         }

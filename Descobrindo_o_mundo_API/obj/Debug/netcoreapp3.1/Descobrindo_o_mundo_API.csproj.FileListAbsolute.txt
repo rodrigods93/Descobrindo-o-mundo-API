@@ -1,6 +1,16 @@
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\publish\web.config
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\web.config
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\appsettings.Development.json
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\appsettings.json
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\appsettings.Development.json
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\appsettings.json
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\Descobrindo_o_mundo_API.deps.json
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\Descobrindo_o_mundo_API.runtimeconfig.json
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\publish\appsettings.Development.json
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\publish\appsettings.json
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\publish\Descobrindo_o_mundo_API.deps.json
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\publish\publish\Descobrindo_o_mundo_API.runtimeconfig.json
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.exe
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.deps.json
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.runtimeconfig.json
@@ -140,6 +150,7 @@ E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreap
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.csprojAssemblyReference.cache
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.AssemblyInfoInputs.cache
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.AssemblyInfo.cs
 E:\workspace\Descobrindo_o_mundo_API\Descobrindo_o_mundo_API\obj\Debug\netcoreapp3.1\Descobrindo_o_mundo_API.csproj.CoreCompileInputs.cache

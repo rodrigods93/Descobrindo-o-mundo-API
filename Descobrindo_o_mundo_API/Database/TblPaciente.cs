@@ -19,11 +19,6 @@ namespace Descobrindo_o_mundo_API
             TblPartida = new HashSet<TblPartida>();
         }
 
-        /*
-         * TODO
-         * Construtor com argumentos para adicionar um paciente no BD.
-         * Preciso descobrir o que é 'HashSet' e como ele influencia no construtor acima.
-         */
         public TblPaciente(string nick, int idUsuarioPaciente)
         {
             this.DscNicknamePaciente = nick;

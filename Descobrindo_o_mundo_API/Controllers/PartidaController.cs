@@ -18,7 +18,7 @@ namespace Descobrindo_o_mundo_API.Controllers
     {
         //api/[controller]/{nickname}
         [HttpGet("{nickname}")]
-        public ActionResult<List<Partida>> Lista(string nickname)
+        public ActionResult<List<TblPartida>> Listar(string nickname)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Descobrindo_o_mundo_API.Controllers
                     Partida partida = new Partida(tblPartida.IdJogoPartida, tblPartida.IdPacientePartida, tblPartida.IdPalavraPartida, tblPartida.DtPartida.ToString(), tblPartida.DuracaoPartida.ToString(), tblPartida.StatusPartida, (int)tblPartida.QtdErrosPartida, (int)tblPartida.QtdAcertosPartida);
                     listaPartida.Add(partida);
                 }
-                return Ok(listaPartida);
+                return Ok(listaTblPartida);
             }
             catch (Exception)
             {
@@ -46,8 +46,18 @@ namespace Descobrindo_o_mundo_API.Controllers
         [HttpPost]
         public ActionResult Cadastrar([FromBody] Partida partida)
         {
-            partida.Cadastrar(partida);
-            return Ok();
+            try
+            {
+                partida.Cadastrar(partida);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(
+                        500,
+                        new ErrorResponse("Não foi possível responder a requisição.")
+                    );
+            }
         }
     }
 }
